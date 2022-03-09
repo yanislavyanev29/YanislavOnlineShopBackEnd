@@ -3,9 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32112.339
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YanislavOnlineShopBackEnd", "YanislavOnlineShopBackEnd.csproj", "{2EE7797C-FC8E-4D89-B81E-204580ACA76C}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineShop.DB", "..\OnlineShop.DB\OnlineShop.DB.csproj", "{D1FD3B88-A62B-4399-B599-3DAE48B5BD7B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YanislavOnlineShopBackEnd", "YanislavOnlineShopBackEnd.csproj", "{2EE7797C-FC8E-4D89-B81E-204580ACA76C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +15,6 @@ Global
 		{2EE7797C-FC8E-4D89-B81E-204580ACA76C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2EE7797C-FC8E-4D89-B81E-204580ACA76C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2EE7797C-FC8E-4D89-B81E-204580ACA76C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D1FD3B88-A62B-4399-B599-3DAE48B5BD7B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D1FD3B88-A62B-4399-B599-3DAE48B5BD7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D1FD3B88-A62B-4399-B599-3DAE48B5BD7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D1FD3B88-A62B-4399-B599-3DAE48B5BD7B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
