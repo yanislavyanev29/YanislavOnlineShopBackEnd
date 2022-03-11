@@ -6,7 +6,9 @@ namespace OnlineShop.DB.Models
 {
     public class Product
     {
+
         public Product()
+
         {
             this.Sizes = new HashSet<Size>();
             this.Votes = new List<Vote>();
@@ -29,7 +31,7 @@ namespace OnlineShop.DB.Models
         public bool IsAvailable { get; set; }
         public int CategoryId { get; set; }
 
-        public virtual Category Category { get; set; }
+        public virtual Category? Category { get; set; }
 
 
         public virtual ICollection<Size> Sizes { get; set; }

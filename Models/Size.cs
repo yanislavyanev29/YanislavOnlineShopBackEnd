@@ -8,10 +8,10 @@ namespace OnlineShop.DB.Models
     {
         public int Id { get; set; }
         [MaxLength(4)]
-        public string value { get; set; }
+        public string? value { get; set; }
 
         public int ProductId { get; set; }
 
-        public virtual Product Product { get; set; }
+        public virtual Product? Product { get; set; }
     }
 }

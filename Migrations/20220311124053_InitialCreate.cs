@@ -111,7 +111,7 @@ namespace YanislavOnlineShopBackEnd.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    value = table.Column<string>(type: "nvarchar(4)", maxLength: 4, nullable: false),
+                    value = table.Column<string>(type: "nvarchar(4)", maxLength: 4, nullable: true),
                     ProductId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -133,7 +133,7 @@ namespace YanislavOnlineShopBackEnd.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ProductId = table.Column<int>(type: "int", nullable: false),
                     UserId = table.Column<int>(type: "int", nullable: false),
-                    UserId1 = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    UserId1 = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     Value = table.Column<byte>(type: "tinyint", nullable: false)
                 },
                 constraints: table =>
@@ -149,8 +149,7 @@ namespace YanislavOnlineShopBackEnd.Migrations
                         name: "FK_Votes_User_UserId1",
                         column: x => x.UserId1,
                         principalTable: "User",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(

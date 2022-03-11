@@ -12,7 +12,7 @@ using OnlineShop.DB;
 namespace YanislavOnlineShopBackEnd.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220309105028_InitialCreate")]
+    [Migration("20220311124053_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -157,7 +157,6 @@ namespace YanislavOnlineShopBackEnd.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("value")
-                        .IsRequired()
                         .HasMaxLength(4)
                         .HasColumnType("nvarchar(4)");
 
@@ -222,7 +221,6 @@ namespace YanislavOnlineShopBackEnd.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("UserId1")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<byte>("Value")
@@ -308,9 +306,7 @@ namespace YanislavOnlineShopBackEnd.Migrations
 
                     b.HasOne("OnlineShop.DB.Models.User", "User")
                         .WithMany("Votes")
-                        .HasForeignKey("UserId1")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserId1");
 
                     b.Navigation("Product");
 
