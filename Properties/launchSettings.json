@@ -16,7 +16,10 @@
       "launchUrl": "swagger",
       "applicationUrl": "https://localhost:7010;http://localhost:5010",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "JWT_SECRET": "This Yanislav's online-shop cool JWT authentication token",
+        "JWT_ISSUER": "Yanev OnlineShop"
+
       }
     },
     "IIS Express": {

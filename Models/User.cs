@@ -8,18 +8,18 @@ namespace OnlineShop.DB.Models
     {
         public User()
         {
-            this.Id = Guid.NewGuid().ToString();
+           
             this.Votes = new List<Vote>();
         }
 
         [Key]
-        public string Id { get; set; }
+        public int  Id { get; set; }
 
         [Required]
         public string Username { get; set; }
 
         [Required]
-        [MaxLength(6)]
+       
         public string Password { get; set; }
 
         [Required]
@@ -28,7 +28,8 @@ namespace OnlineShop.DB.Models
 
         public string PhoneNumber { get; set; }
 
-        public string Address { get; set; }
+        public string? Address { get; set; }
+
 
         public string ExternalId { get; set; }
         public string ExternalType { get; set; }

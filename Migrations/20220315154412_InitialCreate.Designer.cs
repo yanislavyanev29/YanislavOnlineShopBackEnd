@@ -12,7 +12,7 @@ using OnlineShop.DB;
 namespace YanislavOnlineShopBackEnd.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220311124053_InitialCreate")]
+    [Migration("20220315154412_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -87,14 +87,11 @@ namespace YanislavOnlineShopBackEnd.Migrations
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
-                    b.Property<string>("UserId1")
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId1");
+                    b.HasIndex("UserId");
 
-                    b.ToTable("Order");
+                    b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("OnlineShop.DB.Models.OrderProduct", b =>
@@ -169,11 +166,13 @@ namespace YanislavOnlineShopBackEnd.Migrations
 
             modelBuilder.Entity("OnlineShop.DB.Models.User", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("Address")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
@@ -190,8 +189,7 @@ namespace YanislavOnlineShopBackEnd.Migrations
 
                     b.Property<string>("Password")
                         .IsRequired()
-                        .HasMaxLength(6)
-                        .HasColumnType("nvarchar(6)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PhoneNumber")
                         .IsRequired()
@@ -203,7 +201,7 @@ namespace YanislavOnlineShopBackEnd.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("User");
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("OnlineShop.DB.Models.Vote", b =>
@@ -220,9 +218,6 @@ namespace YanislavOnlineShopBackEnd.Migrations
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
-                    b.Property<string>("UserId1")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<byte>("Value")
                         .HasColumnType("tinyint");
 
@@ -230,7 +225,7 @@ namespace YanislavOnlineShopBackEnd.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.HasIndex("UserId1");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Votes");
                 });
@@ -250,7 +245,9 @@ namespace YanislavOnlineShopBackEnd.Migrations
                 {
                     b.HasOne("OnlineShop.DB.Models.User", "User")
                         .WithMany()
-                        .HasForeignKey("UserId1");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("User");
                 });
@@ -306,7 +303,9 @@ namespace YanislavOnlineShopBackEnd.Migrations
 
                     b.HasOne("OnlineShop.DB.Models.User", "User")
                         .WithMany("Votes")
-                        .HasForeignKey("UserId1");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Product");
 

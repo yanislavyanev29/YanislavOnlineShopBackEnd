@@ -25,6 +25,9 @@ namespace OnlineShop.DB
                 }
             }
             public DbSet<Product> Products { get; set; }
+
+            public DbSet<User> Users { get; set; }
+            public DbSet<Order> Orders { get; set; }
             public DbSet<Vote> Votes { get; set; }
             public DbSet<Image> Images { get; set; }
             public DbSet<Size> Sizes { get; set; }
