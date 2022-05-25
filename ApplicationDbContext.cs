@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using OnlineShop.DB.Models;
+using YanislavOnlineShopBackEnd.Models;
 
 namespace OnlineShop.DB
 {
@@ -24,14 +25,15 @@ namespace OnlineShop.DB
                     optionsBuilder.UseSqlServer(@"Server=YANISLAV\SQLEXPRESS;Database=YanevOnlineDB;Integrated Security=true;");
                 }
             }
-            public DbSet<Product> Products { get; set; }
+        public DbSet<Product> Products { get; set; }
+        public DbSet<Basket> Baskets { get; set; }
+        public DbSet<Order> Orders { get; set; }
 
-            public DbSet<User> Users { get; set; }
-            public DbSet<Order> Orders { get; set; }
-            public DbSet<Vote> Votes { get; set; }
-            public DbSet<Image> Images { get; set; }
-            public DbSet<Size> Sizes { get; set; }
-            public DbSet<Category> Categories { get; set; }
+        
+
+
+
+        
 
             public DbSet<OrderProduct> OrderProducts { get; set; }
             protected override void OnModelCreating(ModelBuilder modelBuilder)

@@ -7,20 +7,10 @@ using System.Threading.Tasks;
 
 namespace OnlineShop.DB.Models
 {
-    public class Category
+    public enum Category
     {
-        public Category()
-        {
-            this.Products = new HashSet<Product>();
-        }
-
-        [Key]
-        public int Id { get; set; }
-
-        [Required]
-        [MaxLength(30)]
-        public string Name { get; set; }
-
-        public ICollection<Product> Products { get; set; }
+      Clothing = 0,
+      Shoes = 1,
+      Accessories = 2,
     }
 }

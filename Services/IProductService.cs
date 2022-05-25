@@ -7,11 +7,7 @@ namespace YanislavOnlineShopBackEnd.Services
         List<Product> GetProducts();
         Product GetProduct(int id);
 
-        Product CreateProduct(Product product);
-
-       Product UpdateProduct(Product data);
-
-        void DeleteProduct(Product product);
+        
 
     }
 }

@@ -29,31 +29,7 @@ namespace YanislavOnlineShopBackEnd.Controllers
             return Ok(this._productService.GetProduct(Id));
         }
 
-        [HttpPost]
-        public IActionResult CreateProduct(Product product)
-        {
-            var newProduct = _productService.CreateProduct(product);
-
-            return CreatedAtRoute("GetProduct", new { newProduct.Id }, newProduct);
-        }
-
-        [HttpDelete]
-        public IActionResult DeleteProduct(Product product)
-        {
-            _productService.DeleteProduct(product);
-            return Ok();
-        }
-
-        [HttpPatch]
-        public IActionResult UpdateProduct(Product data)
-        {
-            if (data == null)
-            {
-                return BadRequest();
-            }
-
-            return Ok(_productService.UpdateProduct(data));
-        }
+       
            
     }
 }

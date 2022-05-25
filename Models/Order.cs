@@ -4,27 +4,20 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using YanislavOnlineShopBackEnd.Models;
 
 namespace OnlineShop.DB.Models
 {
     public class Order
     {
-        [Key]
         public int Id { get; set; }
-
-        [Required]
-        public string Name { get; set; }
-
-        public int UserId { get; set; }
-
-        public virtual User User { get; set; }
-
-        [Required]
-        public string UserAddress { get; set; }
-
-        [Required]
-        public string PhoneNumber { get; set; }
-
-        public DateTime OrderDate { get; set; }
+        public string BuyerId { get; set; }
+        public ShippingAddress ShippingAddress { get; set; }
+        public DateTime OrderDate { get; set; } = DateTime.Now;
+        public List<OrderItem> OrderItems { get; set; }
+        public long Subtotal { get; set; }
+        public long DeliveryFee { get; set; }
+        public OrderStatus OrderStatus { get; set; } = OrderStatus.Pending;
+        public string PaymentIntentId { get; set; }
     }
 }

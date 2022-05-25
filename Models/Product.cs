@@ -8,36 +8,32 @@ namespace OnlineShop.DB.Models
     {
 
         public Product()
-
         {
-            this.Sizes = new HashSet<Size>();
-            this.Votes = new List<Vote>();
-            this.Images = new HashSet<Image>();
+            
+            
+           
         }
+       
         [Key]
         public int Id { get; set; }
 
-        [Required]
-        [MaxLength(50)]
         public string Name { get; set; }
 
-        [Required]
+        public string Brand { get; set; }
+        public string Type { get; set; }
+
+        public string ImageUrl1 { get; set; }
+
+        public string ImageUrl2 { get; set; }
+
+        public string ImageUrl3 { get; set; }
+
         public decimal Price { get; set; }
-
-        [Required]
         public string Description { get; set; }
+        public int QuantityInStock { get; set; }
 
-        [Required]
-        public bool IsAvailable { get; set; }
-        public int CategoryId { get; set; }
+        public  Category Category { get; set; }
 
-        public virtual Category? Category { get; set; }
-
-
-        public virtual ICollection<Size> Sizes { get; set; }
-
-        public virtual ICollection<Vote> Votes { get; set; }
-
-        public virtual ICollection<Image> Images { get; set; }
+      
     }
 }

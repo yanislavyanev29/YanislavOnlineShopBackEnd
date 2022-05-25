@@ -9,11 +9,12 @@ namespace OnlineShop.DB.Models
         public User()
         {
            
-            this.Votes = new List<Vote>();
+            
+            this.OrderProducts = new List<OrderProduct>();
         }
 
         [Key]
-        public int  Id { get; set; }
+        public int   Id { get; set; }
 
         [Required]
         public string Username { get; set; }
@@ -34,6 +35,8 @@ namespace OnlineShop.DB.Models
         public string ExternalId { get; set; }
         public string ExternalType { get; set; }
 
-        public ICollection<Vote> Votes { get; set; }
+       
+
+        public virtual ICollection<OrderProduct> OrderProducts { get; set; }
     }
 }

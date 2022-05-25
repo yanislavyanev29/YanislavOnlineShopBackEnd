@@ -37,20 +37,6 @@ namespace YanislavOnlineShopBackEnd.Services
             return _context.Products.ToList();
         }
 
-        public Product UpdateProduct(Product product)
-        {
-            var productToEdit = _context.Products.FirstOrDefault(e => e.Id == product.Id);
-            if(productToEdit != null)
-            {
-                productToEdit.Name = product.Name;
-                productToEdit.Description = product.Description;
-                productToEdit.IsAvailable= product.IsAvailable;
-                productToEdit.Price = product.Price;
-                productToEdit.CategoryId=product.CategoryId;
-
-                _context.SaveChanges();
-            }
-            return productToEdit;
-        }
+       
     }
 }
