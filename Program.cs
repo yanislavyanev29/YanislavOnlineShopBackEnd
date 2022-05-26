@@ -1,11 +1,14 @@
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using OnlineShop.DB;
 using System.Text;
+using YanislavOnlineShopBackEnd.Seeder;
 using YanislavOnlineShopBackEnd.Services;
 
 var builder = WebApplication.CreateBuilder(args);
+
 
 // Add services to the container.
 
@@ -18,35 +21,11 @@ builder.Services.AddTransient<IProductService, ProductService>();
 builder.Services.AddEndpointsApiExplorer(); 
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddCors(op =>
-{
-    op.AddPolicy("YanevOnlineShopPolicy",
-       builder =>
-       {
-           builder.WithOrigins("*")
-           .AllowAnyHeader()
-           .AllowAnyMethod();
-       });
-});
+builder.Services.AddCors();
 
-var secret = Environment.GetEnvironmentVariable("JWT_SECRET");
-var issuer = Environment.GetEnvironmentVariable("JWT_ISSUER");
 
-builder.Services.AddAuthentication(opts =>
-{
-    opts.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-    opts.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-})
-.AddJwtBearer(opts =>
-{
-    opts.TokenValidationParameters = new TokenValidationParameters
-    {
-        ValidateIssuerSigningKey = true,
-        ValidIssuer = issuer,
-        ValidateAudience = false,
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(secret))
-    };
-});
+
+
         
 
 
@@ -62,9 +41,31 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseRouting();
-
+app.UseCors(opt =>
+{
+    opt.AllowAnyHeader().AllowAnyMethod().AllowCredentials().WithOrigins("http://localhost:3000");
+});
 app.UseAuthorization();
 
 app.MapControllers();
+
+
+
+
+
+using var scope = app.Services.CreateScope();
+var context  = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+var logger = scope.ServiceProvider.GetService<ILogger<Program>>();
+
+try
+{
+     context.Database.Migrate();
+    DbInitilizer.Initilize(context);
+}
+catch (Exception ex)
+{
+
+    logger.LogError(ex, "Problem of migrationg data");
+}
 
 app.Run();

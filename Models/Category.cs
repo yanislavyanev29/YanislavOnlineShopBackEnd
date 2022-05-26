@@ -7,10 +7,17 @@ using System.Threading.Tasks;
 
 namespace OnlineShop.DB.Models
 {
-    public enum Category
+    public class Category
     {
-      Clothing = 0,
-      Shoes = 1,
-      Accessories = 2,
+
+        public Category()
+        {
+            this.Products = new List<Product>();
+        }
+        public int Id { get; set; }
+
+        public string Name { get; set; }
+
+        public ICollection<Product> Products { get; set; }
     }
 }

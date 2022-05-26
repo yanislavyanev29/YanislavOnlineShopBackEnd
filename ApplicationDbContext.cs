@@ -29,17 +29,19 @@ namespace OnlineShop.DB
         public DbSet<Basket> Baskets { get; set; }
         public DbSet<Order> Orders { get; set; }
 
-        
+        public DbSet<Category> Categories { get; set; }
 
-
-
-        
-
-            public DbSet<OrderProduct> OrderProducts { get; set; }
+        public DbSet<OrderProduct> OrderProducts { get; set; }
             protected override void OnModelCreating(ModelBuilder modelBuilder)
             {
 
                 base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Category>().HasData(
+                new Category { Id = 1, Name = "Clothing" },
+                new Category { Id = 2, Name = "Shoes" },
+                new Category { Id = 3, Name = "Accessories" }
+                );
 
                 modelBuilder.Entity<OrderProduct>().HasKey(x => new {
                     x.OrderId,

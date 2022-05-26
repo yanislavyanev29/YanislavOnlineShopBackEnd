@@ -12,8 +12,8 @@ using OnlineShop.DB;
 namespace YanislavOnlineShopBackEnd.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220525105614_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20220526110443_SeedData")]
+    partial class SeedData
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,6 +23,40 @@ namespace YanislavOnlineShopBackEnd.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+
+            modelBuilder.Entity("OnlineShop.DB.Models.Category", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Categories");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Clothing"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Shoes"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Accessories"
+                        });
+                });
 
             modelBuilder.Entity("OnlineShop.DB.Models.Order", b =>
                 {
@@ -84,7 +118,7 @@ namespace YanislavOnlineShopBackEnd.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Category")
+                    b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
@@ -118,6 +152,8 @@ namespace YanislavOnlineShopBackEnd.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
 
                     b.ToTable("Products");
                 });
@@ -263,6 +299,17 @@ namespace YanislavOnlineShopBackEnd.Migrations
                     b.Navigation("Product");
                 });
 
+            modelBuilder.Entity("OnlineShop.DB.Models.Product", b =>
+                {
+                    b.HasOne("OnlineShop.DB.Models.Category", "Category")
+                        .WithMany("Products")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Category");
+                });
+
             modelBuilder.Entity("YanislavOnlineShopBackEnd.Models.BasketItem", b =>
                 {
                     b.HasOne("YanislavOnlineShopBackEnd.Models.Basket", "Basket")
@@ -314,6 +361,11 @@ namespace YanislavOnlineShopBackEnd.Migrations
 
                     b.Navigation("ItemOrdered")
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("OnlineShop.DB.Models.Category", b =>
+                {
+                    b.Navigation("Products");
                 });
 
             modelBuilder.Entity("OnlineShop.DB.Models.Order", b =>
