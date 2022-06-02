@@ -41,10 +41,66 @@ namespace YanislavOnlineShopBackEnd.Seeder
                     Type = "Mens",
                     CategoryId = 1
 
-                }
+                },
 
 
+                new Product
+                {
+                    Name = "NIKE SPORTSWEAR CLUB HOODIE FZ FT",
+                    Description = "The Best Thirt",
+                    Price = 145,
+                    Brand = "Nike",
+                    ImageUrl1 ="https://static.footshop.com/281308/52632.jpg",
+                    ImageUrl2 ="https://static.footshop.com/281296/52632.jpg",
+                    ImageUrl3 ="https://static.footshop.com/281302/52632.jpg",
+                    QuantityInStock = 2,
+                    Type = "Mens",
+                    CategoryId = 1
 
+                },
+
+                 new Product
+                {
+                    Name = "CALVIN KLEIN JEANS ",
+                    Description = "CALVIN KLEIN JEANS FAUX LEATHER OVERSHIRT",
+                    Price = 243,
+                    Brand = "Calvin Klein",
+                    ImageUrl1 ="https://static.footshop.com/562408/119569.jpg",
+                    ImageUrl2 ="https://static.footshop.com/562444/119569.jpg",
+                    ImageUrl3 ="https://static.footshop.com/562411/119569.jpg",
+                    QuantityInStock = 5,
+                    Type = "Womens",
+                    CategoryId = 2
+
+                },
+                 new Product
+                {
+                    Name = "HAN KJØBENHAVN ",
+                    Description = "CALVIN KLEIN JEANS FAUX LEATHER OVERSHIRT",
+                    Price = 318,
+                    Brand = "HAN KJØBENHAVN",
+                    ImageUrl1 ="https://static.footshop.com/658132/156415.jpg",
+                    ImageUrl2 ="https://static.footshop.com/658138/156415.jpg",
+                    ImageUrl3 ="https://static.footshop.com/658129/156415.jpg",
+                    QuantityInStock = 5,
+                    Type = "Mnes",
+                    CategoryId = 1
+
+                },
+                  new Product
+                {
+                    Name = "NIKE AIR VAPORMAX 2021 FLYKNIT",
+                    Description = "Armory Blue/ White-Lt Smoke Grey",
+                    Price = 420,
+                    Brand = "Nike",
+                    ImageUrl1 ="https://static.footshop.com/575596/136759.jpg",
+                    ImageUrl2 ="https://static.footshop.com/575611/136759.jpg",
+                    ImageUrl3 ="https://static.footshop.com/575710/136759.jpg",
+                    QuantityInStock = 10,
+                    Type = "Mens",
+                    CategoryId = 2
+
+                },
             };
 
             foreach (var product in products)

@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using OnlineShop.DB;
 using OnlineShop.DB.Models;
 using YanislavOnlineShopBackEnd.Services;
 
@@ -9,27 +11,27 @@ namespace YanislavOnlineShopBackEnd.Controllers
     [ApiController]
     public class ProductsController : ControllerBase
     {
-        private IProductService _productService;
-
+        private readonly IProductService _productService;
         public ProductsController(IProductService productService)
         {
-            this._productService = productService;
+            _productService = productService;
         }
 
         [HttpGet]
-        public IActionResult GetProducts()
+        public  ActionResult GetProducts()
         {
-            return Ok(this._productService.GetProducts());
+            return Ok(_productService.GetProducts());
         }
 
-        [HttpGet("{Id}", Name = "GetProduct")]
-        public IActionResult GetProduct(int Id)
+        [HttpGet("{id}")]
+        public  ActionResult GetProduct(int id)
         {
+            var product = _productService.GetProduct(id);
 
-            return Ok(this._productService.GetProduct(Id));
+            if(product == null) return NotFound();
+
+            return Ok(product);
+
         }
-
-       
-           
     }
 }

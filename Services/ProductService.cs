@@ -27,9 +27,9 @@ namespace YanislavOnlineShopBackEnd.Services
             _context.SaveChanges();
         }
 
-        public Product GetProduct(int id)
+        public  Product GetProduct(int id)
         {
-           return _context.Products.First(p => p.Id == id);
+           return  _context.Products.First(p => p.Id == id);
         }
 
         public List<Product> GetProducts()
