@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using OnlineShop.DB;
 using OnlineShop.DB.Models;
-using YanislavOnlineShopBackEnd.Services;
+
 
 namespace YanislavOnlineShopBackEnd.Controllers
 {
@@ -11,27 +11,22 @@ namespace YanislavOnlineShopBackEnd.Controllers
     [ApiController]
     public class ProductsController : ControllerBase
     {
-        private readonly IProductService _productService;
-        public ProductsController(IProductService productService)
+        private readonly ApplicationDbContext _context;
+        public ProductsController(ApplicationDbContext context)
         {
-            _productService = productService;
+            _context = context;
         }
 
         [HttpGet]
-        public  ActionResult GetProducts()
+        public async Task<ActionResult<List<Product>>> GetProducts()
         {
-            return Ok(_productService.GetProducts());
+            return await _context.Products.ToListAsync();
         }
 
         [HttpGet("{id}")]
-        public  ActionResult GetProduct(int id)
+        public async Task<ActionResult<Product>> GetProduct(int id)
         {
-            var product = _productService.GetProduct(id);
-
-            if(product == null) return NotFound();
-
-            return Ok(product);
-
+            return await _context.Products.FindAsync(id);
         }
     }
 }

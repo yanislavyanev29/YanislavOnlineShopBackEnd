@@ -15,9 +15,7 @@ namespace YanislavOnlineShopBackEnd.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    BuyerId = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PaymentIntentId = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ClientSecret = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    BuyerId = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {

@@ -6,7 +6,7 @@ using OnlineShop.DB;
 using System.Text;
 using YanislavOnlineShopBackEnd.Middleware;
 using YanislavOnlineShopBackEnd.Seeder;
-using YanislavOnlineShopBackEnd.Services;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,18 +17,12 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 
 builder.Services.AddDbContext<ApplicationDbContext>();
-builder.Services.AddTransient<IProductService, ProductService>();
+
 builder.Services.AddCors();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer(); 
 builder.Services.AddSwaggerGen();
-
-
-
-
-
-        
 
 
 var app = builder.Build();
@@ -47,7 +41,7 @@ if (app.Environment.IsDevelopment())
 app.UseRouting();
 app.UseCors(opt =>
 {
-    opt.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:3000");
+    opt.AllowAnyHeader().AllowAnyMethod().AllowCredentials().WithOrigins("http://localhost:3000");
 });
 app.UseAuthorization();
 
