@@ -12,7 +12,7 @@ using OnlineShop.DB;
 namespace YanislavOnlineShopBackEnd.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220604104913_InitialCreate")]
+    [Migration("20220612071428_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

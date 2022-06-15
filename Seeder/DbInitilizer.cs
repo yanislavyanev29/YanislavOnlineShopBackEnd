@@ -83,7 +83,7 @@ namespace YanislavOnlineShopBackEnd.Seeder
                     ImageUrl2 ="https://static.footshop.com/658138/156415.jpg",
                     ImageUrl3 ="https://static.footshop.com/658129/156415.jpg",
                     QuantityInStock = 5,
-                    Type = "Mnes",
+                    Type = "Mens",
                     CategoryId = 1
 
                 },
