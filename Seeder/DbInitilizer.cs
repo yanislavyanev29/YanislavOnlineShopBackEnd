@@ -1,4 +1,5 @@
-﻿using OnlineShop.DB;
+﻿using Microsoft.AspNetCore.Identity;
+using OnlineShop.DB;
 using OnlineShop.DB.Models;
 
 namespace YanislavOnlineShopBackEnd.Seeder
@@ -6,9 +7,34 @@ namespace YanislavOnlineShopBackEnd.Seeder
     public static class DbInitilizer
     {
 
-
-        public static void Initilize(ApplicationDbContext context)
+        public static async Task Initilize(ApplicationDbContext context,
+            UserManager<User> userManager)
         {
+
+
+            if (!userManager.Users.Any())
+            {
+                var user = new User
+                {
+                    UserName = "yanko",
+                    Email = "yanko@gmail.com"
+                };
+
+                await userManager.CreateAsync(user, "Pa$$w0rd");
+                await userManager.AddToRoleAsync(user, "Member");
+
+
+                var admin = new User
+                {
+                    UserName = "admin",
+                    Email = "admin@test.com"
+                };
+
+                await userManager.CreateAsync(admin, "Pa$$w0rd");
+                await userManager.AddToRolesAsync(admin, new[] { "Member", "Admin" });
+            }
+
+
 
             if (context.Products.Any()) return;
 
@@ -70,7 +96,7 @@ namespace YanislavOnlineShopBackEnd.Seeder
                     ImageUrl3 ="https://static.footshop.com/562411/119569.jpg",
                     QuantityInStock = 5,
                     Type = "Womens",
-                    CategoryId = 2
+                    CategoryId = 1
 
                 },
                  new Product
@@ -108,7 +134,7 @@ namespace YanislavOnlineShopBackEnd.Seeder
                 context.Products.Add(product);
             }
 
-            context.SaveChanges();
+            context.SaveChangesAsync();
         }
     }
 }

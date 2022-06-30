@@ -22,9 +22,7 @@ namespace YanislavOnlineShopBackEnd.Controllers
         public async Task<ActionResult<PagedList<Product>>> GetProducts([FromQuery] ProductParams productParams)
         {
             var query = _context.Products
-#pragma warning disable CS8604 // Possible null reference argument.
                 .Sort(productParams.OrderBy)
-#pragma warning restore CS8604 // Possible null reference argument.
                 .Search(productParams.SearchTerm)
                 .Filter(productParams.Brands, productParams.Types)
                 .AsQueryable();

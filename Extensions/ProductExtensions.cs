@@ -11,8 +11,9 @@ namespace YanislavOnlineShopBackEnd.Extensions
             query = orderBy switch
             {
 
-                "price" => query.OrderBy(p => p.Price),
-                "priceDesc" => query.OrderByDescending(p => p.Price),
+                "clothes" => query.Where(x => x.CategoryId == 1),
+                "shoes" => query.Where(x => x.CategoryId == 2),
+                "accessories" => query.Where(x => x.CategoryId == 3),
                 _ => query.OrderBy(p => p.Name),
             };
 

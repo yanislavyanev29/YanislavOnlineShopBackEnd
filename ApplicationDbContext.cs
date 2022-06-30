@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using OnlineShop.DB.Models;
 using YanislavOnlineShopBackEnd.Models;
 
@@ -6,8 +8,8 @@ namespace OnlineShop.DB
 {
     
     
-        public class ApplicationDbContext : DbContext
-        {
+        public class ApplicationDbContext : IdentityDbContext<User>
+    {
             public ApplicationDbContext()
             {
             }
@@ -18,13 +20,7 @@ namespace OnlineShop.DB
             }
 
 
-            protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            {
-                if (!optionsBuilder.IsConfigured)
-                {
-                    optionsBuilder.UseSqlServer(@"Server=YANISLAV\SQLEXPRESS;Database=YanevOnlineDB;Integrated Security=true;");
-                }
-            }
+
         public DbSet<Product> Products { get; set; }
         public DbSet<Basket> Baskets { get; set; }
         public DbSet<Order> Orders { get; set; }
@@ -32,16 +28,23 @@ namespace OnlineShop.DB
         public DbSet<Category> Categories { get; set; }
 
         public DbSet<OrderProduct> OrderProducts { get; set; }
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-            {
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
 
-                base.OnModelCreating(modelBuilder);
+            base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<Category>().HasData(
                 new Category { Id = 1, Name = "Clothing" },
                 new Category { Id = 2, Name = "Shoes" },
                 new Category { Id = 3, Name = "Accessories" }
                 );
+
+            modelBuilder.Entity<IdentityRole>()
+                .HasData(
+                      new IdentityRole { Name = "Member", NormalizedName = "MEMBER" },
+                      new IdentityRole { Name = "Admin", NormalizedName = "ADMIN" }
+                );
+
 
                 modelBuilder.Entity<OrderProduct>().HasKey(x => new {
                     x.OrderId,
