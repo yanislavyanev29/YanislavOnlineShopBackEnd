@@ -1,4 +1,5 @@
-﻿using YanislavOnlineShopBackEnd.DTO;
+﻿using Microsoft.EntityFrameworkCore;
+using YanislavOnlineShopBackEnd.DTO;
 using YanislavOnlineShopBackEnd.Models;
 
 namespace YanislavOnlineShopBackEnd.Extensions
@@ -22,6 +23,13 @@ namespace YanislavOnlineShopBackEnd.Extensions
                     Quantity = item.Quantity
                 }).ToList()
             };
+        }
+
+        public static IQueryable<Basket> RetrieveBasketWithItems(this IQueryable<Basket> query, string buyerId)
+        {
+            return query.Include(i => i.Items)
+                .ThenInclude(p => p.Product)
+                .Where(b => b.BuyerId == buyerId);
         }
     }
 }

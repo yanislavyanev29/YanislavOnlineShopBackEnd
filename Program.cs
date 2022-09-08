@@ -10,6 +10,7 @@ using YanislavOnlineShopBackEnd.Middleware;
 using YanislavOnlineShopBackEnd.Seeder;
 using YanislavOnlineShopBackEnd.Services;
 using Microsoft.OpenApi.Models;
+using YanislavOnlineShopBackEnd.Models;
 
 var  builder = WebApplication.CreateBuilder(args);
 
@@ -59,7 +60,7 @@ builder.Services.AddIdentityCore<User>(opt =>
  {
      opt.User.RequireUniqueEmail = true;
  })
-    .AddRoles<IdentityRole>()
+    .AddRoles<Role>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
