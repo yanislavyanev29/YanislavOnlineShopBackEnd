@@ -28,6 +28,18 @@ namespace YanislavOnlineShopBackEnd.Controllers
             _tokenService = tokenService;
         }
 
+
+        [Authorize]
+        [HttpGet("savedAddress")]
+        public async Task<ActionResult<UserAddress>> GetSavedAddress()
+        {
+
+            return await _userManager.Users
+                .Where(x => x.UserName == User.Identity.Name)
+                .Select(user => user.Address)
+                .FirstOrDefaultAsync();
+        }
+
         [HttpPost("login")]
        public async Task<ActionResult<UserDTO>> Login (LoginDTO loginDTO)
         {
@@ -81,9 +93,12 @@ namespace YanislavOnlineShopBackEnd.Controllers
                     ModelState.AddModelError(error.Code, error.Description);
                 }
 
-                await _userManager.AddToRoleAsync(user, "Member");
+                return ValidationProblem();
 
             }
+
+            await _userManager.AddToRoleAsync(user, "Member");
+
             return StatusCode(201);
 
         }

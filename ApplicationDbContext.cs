@@ -8,7 +8,7 @@ namespace OnlineShop.DB
 {
     
     
-        public class ApplicationDbContext : IdentityDbContext<User>
+        public class ApplicationDbContext : IdentityDbContext<User,Role, int>
     {
             public ApplicationDbContext()
             {
@@ -39,10 +39,16 @@ namespace OnlineShop.DB
                 new Category { Id = 3, Name = "Accessories" }
                 );
 
-            modelBuilder.Entity<IdentityRole>()
+            modelBuilder.Entity<User>()
+                .HasOne(a => a.Address)
+                .WithOne()
+                .HasForeignKey<UserAddress>(a => a.Id)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Role>()
                 .HasData(
-                      new IdentityRole { Name = "Member", NormalizedName = "MEMBER" },
-                      new IdentityRole { Name = "Admin", NormalizedName = "ADMIN" }
+                      new Role {Id = 1, Name = "Member", NormalizedName = "MEMBER" },
+                      new Role { Id = 2,Name = "Admin", NormalizedName = "ADMIN" }
                 );
 
 
