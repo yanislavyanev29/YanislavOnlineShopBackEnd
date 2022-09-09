@@ -23,7 +23,7 @@ namespace YanislavOnlineShopBackEnd.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<OrderDTO>>> GetOreders()
+        public async Task<ActionResult<List<OrderDTO>>> GetOrders()
         {
             return await _context.Orders
                 .ProjectOrderToOrderDTO()

@@ -57,13 +57,13 @@ namespace YanislavOnlineShopBackEnd.Controllers
             if(anonBasket != null)
             {
 
-                if(userBasket != null)
-                {
-                    _context.Baskets.Remove(userBasket);
+                if(userBasket != null)  _context.Baskets.Remove(userBasket);
+
+
                     anonBasket.BuyerId = user.UserName;
                     Response.Cookies.Delete("buyerId");
                     await _context.SaveChangesAsync();
-                }
+                
 
                
             }
