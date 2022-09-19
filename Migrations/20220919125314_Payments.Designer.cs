@@ -12,8 +12,8 @@ using OnlineShop.DB;
 namespace YanislavOnlineShopBackEnd.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220909183618_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20220919125314_Payments")]
+    partial class Payments
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -341,6 +341,14 @@ namespace YanislavOnlineShopBackEnd.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("ClientSecret")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PaymentIntentId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.ToTable("Baskets");
@@ -429,14 +437,14 @@ namespace YanislavOnlineShopBackEnd.Migrations
                         new
                         {
                             Id = 1,
-                            ConcurrencyStamp = "46a8a741-7f02-47e1-a25f-a2664926a22c",
+                            ConcurrencyStamp = "f261235c-cc77-4911-9def-23368e16342a",
                             Name = "Member",
                             NormalizedName = "MEMBER"
                         },
                         new
                         {
                             Id = 2,
-                            ConcurrencyStamp = "b0c84615-4efe-43d0-95b3-9b64cd21aac0",
+                            ConcurrencyStamp = "120fb244-87fd-408c-bc0b-c5b5eb7eae9c",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });

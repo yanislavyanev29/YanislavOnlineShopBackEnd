@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace YanislavOnlineShopBackEnd.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class Payments : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -56,7 +56,9 @@ namespace YanislavOnlineShopBackEnd.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    BuyerId = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    BuyerId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PaymentIntentId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ClientSecret = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -338,8 +340,8 @@ namespace YanislavOnlineShopBackEnd.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { 1, "46a8a741-7f02-47e1-a25f-a2664926a22c", "Member", "MEMBER" },
-                    { 2, "b0c84615-4efe-43d0-95b3-9b64cd21aac0", "Admin", "ADMIN" }
+                    { 1, "f261235c-cc77-4911-9def-23368e16342a", "Member", "MEMBER" },
+                    { 2, "120fb244-87fd-408c-bc0b-c5b5eb7eae9c", "Admin", "ADMIN" }
                 });
 
             migrationBuilder.InsertData(
