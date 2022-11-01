@@ -24,16 +24,14 @@ namespace OnlineShop.DB.Models
 
         public string ImageUrl1 { get; set; }
 
-        public string ImageUrl2 { get; set; }
-
-        public string ImageUrl3 { get; set; }
 
         public decimal Price { get; set; }
         public string Description { get; set; }
         public int QuantityInStock { get; set; }
 
+        public string PublicId { get; set; }
         public int CategoryId { get; set; }
-        public  Category Category { get; set; }
+        public  Category? Category { get; set; }
 
       
     }

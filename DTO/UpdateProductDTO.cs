@@ -3,8 +3,10 @@ using System.ComponentModel.DataAnnotations;
 
 namespace YanislavOnlineShopBackEnd.DTO
 {
-    public class CreateProductDTO
+    public class UpdateProductDTO
     {
+
+        public int Id { get; set; }
         [Required]
         public string Name { get; set; }
 
@@ -13,20 +15,24 @@ namespace YanislavOnlineShopBackEnd.DTO
 
         [Required]
         [Range(100, Double.PositiveInfinity)]
-        public decimal Price { get; set; }
+        public long Price { get; set; }
+
+        public IFormFile File { get; set; }
 
         [Required]
-        public IFormFile File  { get; set; }
-
+        public string Type { get; set; }
 
         [Required]
         public string Brand { get; set; }
 
+     
+        public Category? Category { get; set; }
+
         [Required]
         [Range(0, 200)]
-        public int QuantityInStock { get; set; }
-
-        
-        public Category? Category { get; set; }
+        public int QuantityInStock
+        {
+            get; set;
+        }
     }
 }

@@ -11,8 +11,9 @@ using YanislavOnlineShopBackEnd.Seeder;
 using YanislavOnlineShopBackEnd.Services;
 using Microsoft.OpenApi.Models;
 using YanislavOnlineShopBackEnd.Models;
+using YanislavOnlineShopBackEnd.RequestHeaders;
 
-var  builder = WebApplication.CreateBuilder(args);
+var builder = WebApplication.CreateBuilder(args);
 
 
 // Add services to the container.
@@ -81,9 +82,11 @@ builder.Services.AddAuthorization();
 
 builder.Services.AddScoped<TokenService>();
 builder.Services.AddScoped<PaymentService>();
+builder.Services.AddScoped<ImageService>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer(); 
+builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddAutoMapper(typeof(MappingProfile).Assembly);
 
 
 var app = builder.Build();
@@ -96,9 +99,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "API v1"));
 }
-    //app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 
-    app.UseRouting();
+app.UseRouting();
 app.UseCors(opt =>
 {
     opt.AllowAnyHeader().AllowAnyMethod().AllowCredentials().WithOrigins("http://localhost:3000");
@@ -110,14 +113,14 @@ app.MapControllers();
 
 
 using var scope = app.Services.CreateScope();
-var context  = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
 var userManager = scope.ServiceProvider.GetRequiredService<UserManager<User>>();
 var logger = scope.ServiceProvider.GetService<ILogger<Program>>();
 
 try
 {
-   await  context.Database.MigrateAsync();
-  await DbInitilizer.Initilize(context,userManager);
+    await context.Database.MigrateAsync();
+    await DbInitilizer.Initilize(context, userManager);
 }
 catch (Exception ex)
 {
@@ -125,4 +128,4 @@ catch (Exception ex)
     logger.LogError(ex, "Problem of migrationg data");
 }
 
-app.Run();
+app.RunAsync();
